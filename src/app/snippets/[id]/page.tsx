@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link';
-import { db } from '@/app/db'
+import { db } from '@/app/db';
+import * as actions from '@/actions';
 
 interface SnippetShowProps {
     params: { id: string }
@@ -15,13 +16,18 @@ export default async function ShowSnippetPage(props: SnippetShowProps) {
     if (!snippet) {
         return <NotFound id={id} />
     }
+
+const deleteSnippet = actions.deleteSnippet.bind(null, id);
+
 return (
     <section className="w-8/12 mx-auto">
         <div className="flex flex-col m-4 justify-between items-center">
         <h1 className="txt-xl font-bold">{snippet.title ?? 'Not Found'}</h1>
         <div className="flex gap-4 p-4">
             <Link href={`/snippets/${snippet.id}/edit`} className="text-center p-2 border rounded w-36">Edit</Link>
+            <form action={deleteSnippet}>
             <button className="p-2 border rounded w-36">Delete</button>
+            </form>
         </div>
        <pre className="p-3 border rounded bg-gray-200 border-gray-200 text-teal-600 min-w-fit">
             <code>{snippet.code}</code>

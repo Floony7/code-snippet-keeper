@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} text-white`} style={{ background: '#234', border: '2px solid red', minHeight: '100vh'}}>
+      <body className={`${inter.className} text-white bg-emerald-800 p-0`}>
       <section className="container mx-auto w-75">
         {children}
         </section>
